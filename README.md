@@ -1,30 +1,39 @@
 # QuickArk-PPT
-简洁专业、适合步步高课件整理 Python 工具
 
-## Project Introduction
-A Python tool specially designed for BBK (BBK Education) semester PPT sorting & management.
-It automatically classifies courseware by **chapters, knowledge points and teaching objectives**, standardizes file naming, sorts messy PPT materials, and builds a clear and searchable courseware directory.
+本仓库收录**两个功能不同、互不冲突**的 PPT 课件整理工具，可单独使用，也可搭配使用：
 
-No complicated operation, one-click sorting, greatly improves the efficiency of finding and reviewing teaching courseware.
+| 工具 | 语言 | 核心功能 | 是否移动文件 |
+| --- | --- | --- | --- |
+| **QuickArk_PPT.py** | Python | 按章节/知识点把课件**归类归档**到文件夹 | 是（建目录并移动） |
+| **pptclean/** | Go | **清洗文件名**，让「按名称排序」顺序正确 | 否（原地重命名） |
 
-## Features
-- Classify PPT files by semester, chapter and teaching purpose
-- Standardize file structure & folder classification
-- Fast search and locate corresponding courseware
-- Support batch sorting, no damage to original PPT files
-- Lightweight, easy to use, suitable for teachers and students
+> 典型搭配：先用 `pptclean` 规整文件名 → 再用 `QuickArk_PPT.py` 把课件按章节归档。
 
 ---
 
-## 中文版本
-# 步步高学期课件PPT整理工具
-一款基于Python开发的步步高各学期教学PPT批量整理软件。
+## 1. QuickArk_PPT.py（Python · 课件归类归档）
+按学期、章节、教学目标自动把杂乱课件分级归档进清晰目录，方便查找与复习。
+- 详细说明与用法见 **[QuickArk_PPT.md](QuickArk_PPT.md)**（即原 README）。
 
-可按照**不同章节**对杂乱课件自动归类、分级归档，规范化整理学期课件目录，大幅提升课件查找、复习、备课效率。
+## 2. pptclean/（Go · 文件名清洗排序）
+解决 Windows「按名称排序」把「第九章」排到「第八章」前面这类问题：
+把 `第X章 / 第X讲` 的中文数字归一为零填充阿拉伯数字（如 `第九章 第31讲` → `第09章 第31讲`），
+阿拉伯数字也会补零（`第5讲` → `第05讲`），从而实现正确的章节/讲次顺序。
+- 详细说明、构建与用法见 **[pptclean/README.md](pptclean/README.md)**。
 
-### 主要功能
-1. 按学期、章节、教学目标智能分类PPT课件
-2. 自动规整文件夹结构，统一文件命名格式
-3. 快速检索定位对应知识点课件
-4. 批量无损整理，不损坏原PPT文件
-5. 轻量化运行，操作简单，教师备课专用
+---
+
+## 快速开始
+
+```bash
+# 方式一：先规整文件名，再归类归档
+cd pptclean && go build -o pptclean.exe ./cmd/pptclean
+./pptclean "D:\课件\...\教师用书配套课件"      # 预览后确认改名
+# 改名完成后，回到上层用 Python 工具归档
+python ../QuickArk_PPT.py
+
+# 方式二：只想排序，不动目录结构
+# 仅使用 pptclean 即可
+```
+
+两个工具各自独立，按需取用。
