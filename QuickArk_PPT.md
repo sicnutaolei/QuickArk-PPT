@@ -1,6 +1,8 @@
 # QuickArk-PPT
 简洁专业、适合步步高课件整理 Python 工具
 
+> 注：本文件为 **Python 原版** 说明。Go 重构版（支持任意章/节、文件夹命名零填充）见 **[quickark/](quickark/README.md)**。
+
 ## Project Introduction
 A Python tool specially designed for BBK (BBK Education) semester PPT sorting & management.
 It automatically classifies courseware by **chapters, knowledge points and teaching objectives**, standardizes file naming, sorts messy PPT materials, and builds a clear and searchable courseware directory.
